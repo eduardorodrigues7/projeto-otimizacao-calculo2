@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroOtimiza — Produção Ótima</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── CABEÇALHO ─────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">🌿 AgroOtimiza</div>
+      <p class="tagline">Descubra a combinação de culturas que maximiza seu lucro</p>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- ── FORMULÁRIO ────────────────────────────────────── -->
+    <section class="card form-card">
+      <h2 class="section-title">📊 Parâmetros da Propriedade</h2>
+      <p class="section-desc">
+        Informe as receitas e custos por hectare de cada cultura
+        e o fator de competição entre elas.
+      </p>
+
+      <div class="form-grid">
+        <div class="field-group">
+          <label for="receitaAcai">Receita do Açaí (R$/ha)</label>
+          <input id="receitaAcai" type="number" step="0.01"
+                 placeholder="Ex: 1200" />
+        </div>
+
+        <div class="field-group">
+          <label for="receitaMandioca">Receita da Mandioca (R$/ha)</label>
+          <input id="receitaMandioca" type="number" step="0.01"
+                 placeholder="Ex: 800" />
+        </div>
+
+        <div class="field-group">
+          <label for="custoAcai">Coef. de Custo do Açaí (c)</label>
+          <input id="custoAcai" type="number" step="0.01"
+                 placeholder="Ex: 2" />
+          <span class="field-hint">Representa o custo quadrático por hectare²</span>
+        </div>
+
+        <div class="field-group">
+          <label for="custoMandioca">Coef. de Custo da Mandioca (d)</label>
+          <input id="custoMandioca" type="number" step="0.01"
+                 placeholder="Ex: 3" />
+          <span class="field-hint">Representa o custo quadrático por hectare²</span>
+        </div>
+
+        <div class="field-group full-width">
+          <label for="competencia">Fator de Competição entre Culturas (e)</label>
+          <input id="competencia" type="number" step="0.01"
+                 placeholder="Ex: 1" />
+          <span class="field-hint">
+            Quanto maior, mais as culturas competem por recursos (solo, água, trabalho)
+          </span>
+        </div>
+      </div>
+
+      <button class="btn-calcular" onclick="calcular()">
+        🌱 Calcular Produção Ótima
+      </button>
+
+      <div id="erro" class="msg-erro" style="display:none"></div>
+    </section>
+
+    <!-- ── RESULTADO PRINCIPAL ────────────────────────────── -->
+    <section id="resultado" class="resultado-wrapper" style="display:none">
+
+      <div class="cards-resultado">
+        <div class="card resultado-card destaque">
+          <div class="resultado-label">🌴 Açaí — Área Ótima</div>
+          <div class="resultado-valor" id="res-x">— ha</div>
+        </div>
+        <div class="card resultado-card destaque">
+          <div class="resultado-label">🌿 Mandioca — Área Ótima</div>
+          <div class="resultado-valor" id="res-y">— ha</div>
+        </div>
+        <div class="card resultado-card destaque verde">
+          <div class="resultado-label">💰 Lucro Máximo</div>
+          <div class="resultado-valor" id="res-lucro">R$ —</div>
+        </div>
+        <div class="card resultado-card">
+          <div class="resultado-label">📌 Classificação do Ponto</div>
+          <div class="resultado-valor classificacao" id="res-classif">—</div>
+        </div>
+      </div>
+
+      <!-- ── SENSIBILIDADE ──────────────────────────────────── -->
+      <div class="card">
+        <h3 class="section-title">📈 Análise de Sensibilidade</h3>
+        <p class="section-desc">
+          Como o lucro se comporta se os preços de mercado variarem ±10%?
+        </p>
+        <div class="tabela-sens">
+          <table>
+            <thead>
+              <tr>
+                <th>Cenário</th>
+                <th>Lucro Estimado</th>
+                <th>Variação</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-sens-body">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ── JUSTIFICATIVA MATEMÁTICA ──────────────────────── -->
+      <div class="card card-math">
+        <h3 class="section-title">📐 Como a Solução Foi Obtida</h3>
+        <p class="section-desc">
+          Explicação passo a passo do processo matemático — sem jargão, de forma clara.
+        </p>
+
+        <div class="math-steps" id="math-steps">
+          <!-- preenchido via JS -->
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      AgroOtimiza · Projeto de Cálculo 2 — Otimização de Funções de Várias Variáveis ·
+      Centro Universitário do Pará
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+/* ── Reset e base ──────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --verde-escuro:  #1a5e2e;
+  --verde-medio:   #2d8a4e;
+  --verde-claro:   #e8f5ec;
+  --verde-borda:   #a8d5b5;
+  --amarelo:       #f0a500;
+  --amarelo-claro: #fff8e6;
+  --vermelho:      #c0392b;
+  --text-principal: #1a2c1f;
+  --text-sec:      #4a6052;
+  --fundo:         #f4f9f5;
+  --branco:        #ffffff;
+  --sombra:        0 2px 12px rgba(0,0,0,.09);
+  --radius:        12px;
+  --fonte:         'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  font-family: var(--fonte);
+  background: var(--fundo);
+  color: var(--text-principal);
+  line-height: 1.6;
+}
+
+/* ── Cabeçalho ─────────────────────────────────────────── */
+.site-header {
+  background: linear-gradient(135deg, var(--verde-escuro) 0%, var(--verde-medio) 100%);
+  color: #fff;
+  padding: 40px 24px 32px;
+  text-align: center;
+}
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -.5px;
+  margin-bottom: 6px;
+}
+.tagline {
+  font-size: .95rem;
+  opacity: .85;
+}
+
+/* ── Layout principal ──────────────────────────────────── */
+.main-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ── Cards ─────────────────────────────────────────────── */
+.card {
+  background: var(--branco);
+  border-radius: var(--radius);
+  box-shadow: var(--sombra);
+  padding: 28px;
+}
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--verde-escuro);
+  margin-bottom: 6px;
+}
+.section-desc {
+  font-size: .88rem;
+  color: var(--text-sec);
+  margin-bottom: 20px;
+}
+
+/* ── Formulário ─────────────────────────────────────────── */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.full-width { grid-column: 1 / -1; }
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.field-group label {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--text-principal);
+}
+.field-group input {
+  padding: 10px 12px;
+  border: 1.5px solid #cde0d3;
+  border-radius: 8px;
+  font-size: .95rem;
+  transition: border-color .2s;
+  outline: none;
+}
+.field-group input:focus { border-color: var(--verde-medio); }
+.field-hint {
+  font-size: .75rem;
+  color: var(--text-sec);
+}
+
+.btn-calcular {
+  display: block;
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  background: var(--verde-escuro);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, transform .1s;
+}
+.btn-calcular:hover  { background: var(--verde-medio); }
+.btn-calcular:active { transform: scale(.98); }
+.btn-calcular:disabled { opacity: .6; cursor: not-allowed; }
+
+.msg-erro {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: #fdecea;
+  border-left: 4px solid var(--vermelho);
+  border-radius: 6px;
+  font-size: .88rem;
+  color: #8b1a13;
+}
+
+/* ── Cards de resultado ─────────────────────────────────── */
+.resultado-wrapper { display: flex; flex-direction: column; gap: 20px; }
+
+.cards-resultado {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+.resultado-card { text-align: center; }
+.resultado-card.destaque {
+  border-top: 4px solid var(--verde-medio);
+}
+.resultado-card.verde {
+  border-top-color: var(--amarelo);
+  background: var(--amarelo-claro);
+}
+.resultado-label {
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text-sec);
+  margin-bottom: 8px;
+}
+.resultado-valor {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--verde-escuro);
+}
+
+/* classificação colorida */
+.resultado-valor.classificacao.max  { color: var(--verde-medio); }
+.resultado-valor.classificacao.min  { color: #c0392b; }
+.resultado-valor.classificacao.sela { color: #e67e22; }
+
+/* ── Tabela sensibilidade ───────────────────────────────── */
+.tabela-sens { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th {
+  text-align: left;
+  padding: 10px 12px;
+  background: var(--verde-claro);
+  color: var(--verde-escuro);
+  font-size: .8rem;
+  letter-spacing: .04em;
+  border-bottom: 2px solid var(--verde-borda);
+}
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eef3f0;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f9fcfa; }
+.positivo { color: var(--verde-medio); font-weight: 700; }
+.negativo { color: var(--vermelho);    font-weight: 700; }
+
+/* ── Seção matemática ───────────────────────────────────── */
+.card-math { border-left: 4px solid var(--verde-medio); }
+
+.math-steps { display: flex; flex-direction: column; gap: 20px; }
+
+.math-step {
+  padding: 16px;
+  background: var(--verde-claro);
+  border-radius: 8px;
+}
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.step-icone  { font-size: 1.1rem; }
+.step-titulo { font-weight: 700; color: var(--verde-escuro); font-size: .95rem; }
+.step-texto  { font-size: .87rem; color: var(--text-sec); margin-bottom: 10px; }
+.step-formula {
+  background: #fff;
+  border: 1px solid var(--verde-borda);
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-family: 'Courier New', monospace;
+  font-size: .82rem;
+  color: var(--text-principal);
+  white-space: pre-wrap;
+  line-height: 1.7;
+}
+
+/* ── Rodapé ────────────────────────────────────────────── */
+.site-footer {
+  text-align: center;
+  padding: 20px;
+  font-size: .78rem;
+  color: var(--text-sec);
+  border-top: 1px solid #dceae1;
+}
+
+/* ── Responsivo ─────────────────────────────────────────── */
+@media (max-width: 580px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .cards-resultado { grid-template-columns: 1fr 1fr; }
+  .resultado-valor { font-size: 1.2rem; }
+}
