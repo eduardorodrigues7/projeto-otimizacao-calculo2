@@ -5,11 +5,11 @@ conn = sqlite3.connect("database.db")
 conn.execute("""
 CREATE TABLE IF NOT EXISTS consultas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    receita_acai REAL,
-    receita_mandioca REAL,
-    custo_acai REAL,
-    custo_mandioca REAL,
-    competencia REAL,
+    receita_alpha REAL,
+    receita_beta REAL,
+    custo_alpha REAL,
+    custo_beta REAL,
+    interacao REAL,
     x_otimo REAL,
     y_otimo REAL,
     lucro REAL,

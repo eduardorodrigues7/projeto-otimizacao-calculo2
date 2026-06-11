@@ -1,4 +1,4 @@
-# 🌿 AgroOtimiza — Otimização da Produção Agrícola
+# 💼 LucroMax — Maximização de Lucro Operacional
 
 Projeto da disciplina **Resolução de Problemas Multivariáveis** — Cálculo 2  
 Curso de Ciência da Computação · Centro Universitário do Pará (CESUPA)  
@@ -15,7 +15,7 @@ Professor: Pedro Girotto
 
 ## 📌 Descrição
 
-Aplicação full stack que resolve analiticamente o problema de **alocação ótima de área agrícola** entre duas culturas (açaí e mandioca), maximizando o lucro do produtor rural.
+Aplicação full stack que resolve analiticamente o problema de **maximização de lucro** em duas linhas de produção, mantendo a mesma matemática do problema original.
 
 A função objetivo é:
 
@@ -23,7 +23,7 @@ A função objetivo é:
 L(x, y) = a·x + b·y − c·x² − d·y² − e·x·y
 ```
 
-onde `x` = hectares de açaí, `y` = hectares de mandioca.
+onde `x` = unidades produzidas do Produto A e `y` = unidades produzidas do Produto B.
 
 O sistema calcula:
 - Derivadas parciais ∂L/∂x e ∂L/∂y
@@ -36,10 +36,10 @@ O sistema calcula:
 
 ## 👤 Persona
 
-**Maria das Graças Souza**, 48 anos, produtora rural no município de Igarapé-Miri (PA).  
-Cultiva açaí e mandioca há 20 anos de forma empírica, sem critério técnico para alocar as áreas.  
-**Dor:** decide a divisão de área por intuição, frequentemente subalocando a cultura mais rentável.  
-**Métrica de sucesso:** aumento de ≥ 15% no lucro anual após adotar a alocação recomendada pelo sistema.
+**Carla Martins**, 35 anos, gerente de produção em uma pequena fábrica de peças industriais.
+Ela precisa decidir quanto produzir em duas linhas distintas para não perder lucro nem desperdiçar recursos.
+**Dor:** usa decisões empíricas e não tem uma estratégia segura para maximizar o lucro operacional.
+**Métrica de sucesso:** identificar a combinação de produção que gera o maior lucro possível.
 
 ---
 
@@ -57,7 +57,7 @@ git clone https://github.com/seu-usuario/projeto-otimizacao-calculo2.git
 cd projeto-otimizacao-calculo2
 
 # 2. Instale as dependências
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 
 # 3. Crie o banco de dados
 python criar_banco.py
@@ -76,11 +76,11 @@ Acesse em: **http://localhost:5000**
 
 | Parâmetro | Valor |
 |---|---|
-| Receita do Açaí (a) | 1200 R$/ha |
-| Receita da Mandioca (b) | 800 R$/ha |
-| Custo quadrático açaí (c) | 2 |
-| Custo quadrático mandioca (d) | 3 |
-| Fator de competição (e) | 1 |
+| Receita do Produto A (a) | 1200 R$/unidade |
+| Receita do Produto B (b) | 800 R$/unidade |
+| Coeficiente de custo do Produto A (c) | 2 |
+| Coeficiente de custo do Produto B (d) | 3 |
+| Fator de interação (e) | 1 |
 
 **Saída esperada:**
 
@@ -112,13 +112,8 @@ projeto-otimizacao-calculo2/
 
 ---
 
-## 🤖 Uso de Inteligência Artificial
+## 🤖 Nota
 
-Este projeto utilizou **Claude (Anthropic)** como ferramenta de apoio para:
-- Revisão e aprimoramento do código back end (cálculo das derivadas, hessiana e sensibilidade)
-- Aprimoramento do front end (estrutura HTML, CSS e renderização dos passos matemáticos)
-- Geração e revisão deste README
-
-Todo o uso foi declarado conforme exigido pelas regras de integridade acadêmica do projeto.
+O projeto mantém a mesma abordagem matemática do problema original, apenas alterando o contexto para maximização de lucro em linhas de produção.
 
 ---

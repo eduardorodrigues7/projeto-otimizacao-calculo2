@@ -5,17 +5,25 @@ async function calcular() {
   resultado.style.display = "none";
 
   const campos = {
-    receita_acai:      document.getElementById("receitaAcai").value,
-    receita_mandioca:  document.getElementById("receitaMandioca").value,
-    custo_acai:        document.getElementById("custoAcai").value,
-    custo_mandioca:    document.getElementById("custoMandioca").value,
-    competencia:       document.getElementById("competencia").value,
+    receita_alpha: document.getElementById("receitaAlpha").value,
+    receita_beta: document.getElementById("receitaBeta").value,
+    custo_alpha: document.getElementById("custoAlpha").value,
+    custo_beta: document.getElementById("custoBeta").value,
+    interacao: document.getElementById("interacao").value,
+  };
+
+  const labels = {
+    receita_alpha: "receita do Produto A",
+    receita_beta: "receita do Produto B",
+    custo_alpha: "coeficiente de custo do Produto A",
+    custo_beta: "coeficiente de custo do Produto B",
+    interacao: "fator de interação entre produtos",
   };
 
   // Validação básica no front
   for (const [chave, val] of Object.entries(campos)) {
     if (val === "" || isNaN(Number(val))) {
-      mostrarErro(`Preencha o campo "${chave.replace(/_/g," ")}" com um número válido.`);
+      mostrarErro(`Preencha o campo "${labels[chave]}" com um número válido.`);
       return;
     }
   }
@@ -39,8 +47,8 @@ async function calcular() {
     }
 
     // ── Resultados principais ──────────────────────────────
-    document.getElementById("res-x").textContent     = `${dados.x} ha`;
-    document.getElementById("res-y").textContent     = `${dados.y} ha`;
+    document.getElementById("res-x").textContent     = `${dados.x} unidades`;
+    document.getElementById("res-y").textContent     = `${dados.y} unidades`;
     document.getElementById("res-lucro").textContent = `R$ ${dados.lucro.toLocaleString("pt-BR", {minimumFractionDigits:2})}`;
     document.getElementById("res-classif").textContent = dados.classificacao;
 
@@ -54,10 +62,10 @@ async function calcular() {
     // ── Tabela de sensibilidade ────────────────────────────
     const s = dados.sensibilidade;
     const linhas = [
-      ["Receita do Açaí +10%",     s.receita_acai_mais10pct,      s.variacao_acai_mais10],
-      ["Receita do Açaí −10%",     s.receita_acai_menos10pct,     s.variacao_acai_menos10],
-      ["Receita da Mandioca +10%", s.receita_mandioca_mais10pct,  s.variacao_mand_mais10],
-      ["Receita da Mandioca −10%", s.receita_mandioca_menos10pct, s.variacao_mand_menos10],
+      ["Receita do Produto A +10%", s.receita_alpha_mais10pct, s.variacao_alpha_mais10],
+      ["Receita do Produto A −10%", s.receita_alpha_menos10pct, s.variacao_alpha_menos10],
+      ["Receita do Produto B +10%", s.receita_beta_mais10pct,  s.variacao_beta_mais10],
+      ["Receita do Produto B −10%", s.receita_beta_menos10pct,  s.variacao_beta_menos10],
     ];
 
     const tbody = document.getElementById("tabela-sens-body");
@@ -79,13 +87,13 @@ async function calcular() {
         icone: "1️⃣",
         titulo: "Função Objetivo",
         texto: `Queremos maximizar o lucro total <strong>L(x, y)</strong>, onde
-                <em>x</em> = hectares de açaí e <em>y</em> = hectares de mandioca:`,
-        formula: `L(x, y) = ${campos.receita_acai}x + ${campos.receita_mandioca}y
-− ${campos.custo_acai}x² − ${campos.custo_mandioca}y² − ${campos.competencia}xy`,
+                <em>x</em> = unidades do Produto A e <em>y</em> = unidades do Produto B:`,
+        formula: `L(x, y) = ${campos.receita_alpha}x + ${campos.receita_beta}y
+− ${campos.custo_alpha}x² − ${campos.custo_beta}y² − ${campos.interacao}xy`,
       },
       {
         icone: "2️⃣",
-        titulo: "Derivadas Parciais (∇f = 0)",
+        titulo: "Derivadas Parciais (∇L = 0)",
         texto: `Para encontrar o ponto de lucro máximo, calculamos as derivadas
                 parciais em relação a <em>x</em> e <em>y</em> e as igualamos a zero:`,
         formula: `∂L/∂x = ${d.derivadas.df_dx} = 0\n∂L/∂y = ${d.derivadas.df_dy} = 0`,
@@ -97,7 +105,7 @@ async function calcular() {
                 Regra de Cramer. O determinante da matriz de coeficientes é
                 <strong>${d.hessiana.discriminante > 0 ? "diferente de zero" : "zero"}</strong>,
                 garantindo solução única:`,
-        formula: `x* = ${d.x} ha  (hectares de açaí)\ny* = ${d.y} ha  (hectares de mandioca)`,
+        formula: `x* = ${d.x} unidades  (Produto A)\ny* = ${d.y} unidades  (Produto B)`,
       },
       {
         icone: "4️⃣",
@@ -138,7 +146,7 @@ async function calcular() {
   } catch (err) {
     mostrarErro("Não foi possível conectar ao servidor. Certifique-se de que o Flask está rodando.");
   } finally {
-    btn.textContent = "🌱 Calcular Produção Ótima";
+    btn.textContent = "📈 Calcular Produção Ótima";
     btn.disabled = false;
   }
 }

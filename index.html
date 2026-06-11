@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgroOtimiza — Produção Ótima</title>
+  <title>LucroMax — Planejamento de Produção</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -11,8 +11,8 @@
   <!-- ── CABEÇALHO ─────────────────────────────────────── -->
   <header class="site-header">
     <div class="header-inner">
-      <div class="logo">🌿 AgroOtimiza</div>
-      <p class="tagline">Descubra a combinação de culturas que maximiza seu lucro</p>
+      <div class="logo">💼 LucroMax</div>
+      <p class="tagline">Defina a produção ideal de duas linhas para maximizar seu lucro</p>
     </div>
   </header>
 
@@ -20,51 +20,50 @@
 
     <!-- ── FORMULÁRIO ────────────────────────────────────── -->
     <section class="card form-card">
-      <h2 class="section-title">📊 Parâmetros da Propriedade</h2>
+      <h2 class="section-title">📊 Parâmetros da Produção</h2>
       <p class="section-desc">
-        Informe as receitas e custos por hectare de cada cultura
-        e o fator de competição entre elas.
+        Informe receitas, custos e a interação entre duas linhas de produção.
       </p>
 
       <div class="form-grid">
         <div class="field-group">
-          <label for="receitaAcai">Receita do Açaí (R$/ha)</label>
-          <input id="receitaAcai" type="number" step="0.01"
+          <label for="receitaAlpha">Receita do Produto A (R$/unidade)</label>
+          <input id="receitaAlpha" type="number" step="0.01"
                  placeholder="Ex: 1200" />
         </div>
 
         <div class="field-group">
-          <label for="receitaMandioca">Receita da Mandioca (R$/ha)</label>
-          <input id="receitaMandioca" type="number" step="0.01"
+          <label for="receitaBeta">Receita do Produto B (R$/unidade)</label>
+          <input id="receitaBeta" type="number" step="0.01"
                  placeholder="Ex: 800" />
         </div>
 
         <div class="field-group">
-          <label for="custoAcai">Coef. de Custo do Açaí (c)</label>
-          <input id="custoAcai" type="number" step="0.01"
+          <label for="custoAlpha">Coef. de Custo do Produto A (c)</label>
+          <input id="custoAlpha" type="number" step="0.01"
                  placeholder="Ex: 2" />
-          <span class="field-hint">Representa o custo quadrático por hectare²</span>
+          <span class="field-hint">Representa o custo quadrático por unidade produzida</span>
         </div>
 
         <div class="field-group">
-          <label for="custoMandioca">Coef. de Custo da Mandioca (d)</label>
-          <input id="custoMandioca" type="number" step="0.01"
+          <label for="custoBeta">Coef. de Custo do Produto B (d)</label>
+          <input id="custoBeta" type="number" step="0.01"
                  placeholder="Ex: 3" />
-          <span class="field-hint">Representa o custo quadrático por hectare²</span>
+          <span class="field-hint">Representa o custo quadrático por unidade produzida</span>
         </div>
 
         <div class="field-group full-width">
-          <label for="competencia">Fator de Competição entre Culturas (e)</label>
-          <input id="competencia" type="number" step="0.01"
+          <label for="interacao">Fator de Interação entre Linhas (e)</label>
+          <input id="interacao" type="number" step="0.01"
                  placeholder="Ex: 1" />
           <span class="field-hint">
-            Quanto maior, mais as culturas competem por recursos (solo, água, trabalho)
+            Quanto maior, mais as linhas competem por recursos internos e mercado.
           </span>
         </div>
       </div>
 
       <button class="btn-calcular" onclick="calcular()">
-        🌱 Calcular Produção Ótima
+        📈 Calcular Produção Ótima
       </button>
 
       <div id="erro" class="msg-erro" style="display:none"></div>
@@ -75,12 +74,12 @@
 
       <div class="cards-resultado">
         <div class="card resultado-card destaque">
-          <div class="resultado-label">🌴 Açaí — Área Ótima</div>
-          <div class="resultado-valor" id="res-x">— ha</div>
+          <div class="resultado-label">🟦 Produto A — Produção Ótima</div>
+          <div class="resultado-valor" id="res-x">— unidades</div>
         </div>
         <div class="card resultado-card destaque">
-          <div class="resultado-label">🌿 Mandioca — Área Ótima</div>
-          <div class="resultado-valor" id="res-y">— ha</div>
+          <div class="resultado-label">🟩 Produto B — Produção Ótima</div>
+          <div class="resultado-valor" id="res-y">— unidades</div>
         </div>
         <div class="card resultado-card destaque verde">
           <div class="resultado-label">💰 Lucro Máximo</div>
